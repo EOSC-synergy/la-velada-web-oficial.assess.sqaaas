@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: 2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/midudev/la-velada-web-oficial:
+      branch: main
+      repo: https://github.com/midudev/la-velada-web-oficial
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/midudev/la-velada-web-oficial git:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-razzmatazz-dodo.sh
+        container: qc.acc_frumpy-ultramarine-toad
+  QC.Doc:
+    repos:
+      github.com/midudev/la-velada-web-oficial find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-apricot-crab.sh
+        container: qc.doc_pokey-cerise-millipede
+      github.com/midudev/la-velada-web-oficial git:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-rust-cougar.sh
+        container: qc.doc_sickly-myrtle-stoat
+      github.com/midudev/la-velada-web-oficial markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-chestnut-cassowary.sh
+        container: qc.doc_shaky-ultramarine-pinscher
+  QC.Lic:
+    repos:
+      github.com/midudev/la-velada-web-oficial licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-periwinkle-eleuth.sh
+        container: qc.lic_sickly-orchid-vulture
+  QC.Sty:
+    repos:
+      github.com/midudev/la-velada-web-oficial jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-denim-lemming.sh
+        container: qc.sty_scaly-cream-tiger
+  QC.Ver:
+    repos:
+      github.com/midudev/la-velada-web-oficial get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-ultramarine-vole.sh
+        container: qc.ver_cranky-cerulean-fox
+timeout: 5400
